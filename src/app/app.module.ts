@@ -8,9 +8,12 @@ import { VetrinaComponent } from './vetrina/vetrina.component';
 import { BackofficeComponent } from './backoffice/backoffice.component';
 
 import { PastryShopService } from './pastry-shop.service';
+import { NotificationService } from './notification.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [PastryShopService],
+  providers: [PastryShopService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
