@@ -1,4 +1,4 @@
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="inputEmail">Email</label>
     <input type="email" class="form-control" [(ngModel)]="Username" placeholder="Email">
 </div>
@@ -10,4 +10,22 @@
 <button type="submit" class="btn btn-primary" (click)="doLogin(Username,Password)">Login</button>
 <br>
 <label>{{UserObject.nome}}</label>
-<label>{{MessageError}}</label>
+<label>{{MessageError}}</label> -->
+
+
+  <div class="login">
+    <h2 class="login-header">Log in</h2>
+      <p>
+        <input type="email" placeholder="Email" [(ngModel)]="Username">
+      </p>
+      <p>
+        <input type="password" placeholder="Password" [(ngModel)]="Password">
+      </p>
+      <p>
+        <input type="submit" (click)="doLogin(Username,Password)" value="Log in">
+      </p>
+      <p>
+        <label>{{UserObject.nome}}</label>
+        <label>{{MessageError}}</label>
+      </p>
+  </div>

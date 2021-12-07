@@ -45,6 +45,9 @@ export class LoginComponent implements OnInit {
       Password: pwd
     };
 
+    this.MessageError = "";
+    this.UserObject.nome = "";
+    
     this.service.login(this.Credentials).subscribe(data => 
       {
         this.UserObject = data
