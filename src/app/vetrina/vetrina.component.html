@@ -1,0 +1,36 @@
+<br>
+<button type="button" class="btn btn-light mr-1">
+    Nuovo
+</button>
+
+<!-- <p>{{ dolciInVetrina | json }} </p> -->
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Disponibilità</th>
+            <th>Prezzo</th>
+            <th>Prezzo Scontato</th>
+            <th>Data messa in vendita</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of dolciInVetrina">
+            <td>{{item.nome}}</td>
+            <td>{{item.disponibilita}}</td>
+            <td>{{item.prezzo}}</td>
+            <td>{{item.prezzoScontato}}</td>
+            <td>{{item.dataMessaInVendita}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1">
+                    Vendi
+                </button>
+                <button type="button" class="btn btn-light mr-1">
+                    Elimina
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

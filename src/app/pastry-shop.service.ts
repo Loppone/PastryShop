@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './login/login.component';
+import { Vetrina } from './vetrina/vetrina.component';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +16,8 @@ export class PastryShopService {
   login(cred: any){
     return this.http.post<User>(this.ApiUrl + '/api/Login', cred);
   }
+
+   loadVetrina() : Observable<Vetrina[]> {
+      return this.http.get<Vetrina[]>(this.ApiUrl + '/api/Vetrina');    
+   }
 }
