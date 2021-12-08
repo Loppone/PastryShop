@@ -13,6 +13,10 @@ export class PastryShopService {
 
   constructor(private http: HttpClient) { }
 
+  runJob(){
+    return this.http.post(this.ApiUrl + '/api/job', '');
+  }
+
   login(cred: any){
     return this.http.post<User>(this.ApiUrl + '/api/Login', cred);
   }
@@ -21,7 +25,11 @@ export class PastryShopService {
       return this.http.get<Vetrina[]>(this.ApiUrl + '/api/Vetrina');    
    }
 
-   sellDolce(a: DtoDolceInVenditaUpdate){
-     return this.http.put<Vetrina>(this.ApiUrl + '/api/Vetrina', a);
+   sellDolce(dto: DtoDolceInVenditaUpdate){
+     return this.http.put<Vetrina>(this.ApiUrl + '/api/Vetrina', dto);
    }
+
+   rimuoviDolce(id: number){
+    return this.http.delete(this.ApiUrl + '/api/Vetrina/' + id);
+  }
 }

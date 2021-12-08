@@ -1,9 +1,70 @@
 <br>
-<button type="button" class="btn btn-light mr-1">
+<!-- <button type="button" class="btn btn-light mr-1">
+    Nuovo
+</button> -->
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
     Nuovo
 </button>
 
 <!-- <p>{{ dolciInVetrina | json }} </p> -->
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Pastry Shop
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="Quantita">
+                    Dolce
+                </label>
+                <div ngbDropdown class="input-group">
+                    <button class="btn btn-outline-primary" id="cmb" ngbDropdownToggle>Dolce</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                      <button ngbDropdownItem>Action - 1</button>
+                      <button ngbDropdownItem>Another Action</button>
+                      <button ngbDropdownItem>Something else is here</button>
+                    </div>
+                  </div>
+
+                <label for="Quantita">
+                    Quantità
+                </label>
+                <div class="input-group">
+                    <input id="disponibilita" class="form-control" placeholder="0">
+                </div>
+                <label for="dataMessaInVendita">
+                    Data messa in vendita
+                </label>
+                <div class="input-group">
+                    <input id="dataMessaInVendita" 
+                        class="form-control" 
+                        ngbDatepicker #dp="ngbDatepicker"
+                        placeholder="yyyy-mm-dd">
+                    <div class="input-group-append">
+                        <button class="btn 
+                            btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+            Salva
+        </button>
+    </div>
+</ng-template>
+
 
 <table class="table table-striped">
     <thead>
@@ -22,13 +83,12 @@
             <td>{{item.disponibilita}}</td>
             <td>{{item.prezzo}}</td>
             <td>{{item.prezzoScontato}}</td>
-            <td>{{item.dataMessaInVendita}}</td>
+            <td>{{item.dataMessaInVendita | date:"dd/MM/yyyy hh:mm"}}</td>
             <td>
-                <button type="button" class="btn btn-light mr-1" 
-                (click)="Sell(item)">
+                <button type="button" class="btn btn-light mr-1" (click)="Sell(item)">
                     Vendi
                 </button>
-                <button type="button" class="btn btn-light mr-1">
+                <button type="button" class="btn btn-light mr-1" (click)="Elimina(item.idLotto)">
                     Elimina
                 </button>
             </td>
