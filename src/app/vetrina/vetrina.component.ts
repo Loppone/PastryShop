@@ -43,6 +43,7 @@ export class VetrinaComponent implements OnInit {
   dataMessaInVendita: any;
   cmbDolce: any;
   qtaMod!: number;
+  valueDolce!: number;
 
   ngOnInit(): void {
     this.service.elencoDolci().subscribe(data =>{
@@ -93,7 +94,7 @@ export class VetrinaComponent implements OnInit {
 
   saveDolce(modal: any){
     var dolce: DtoDolceInVetrinaInsert = {
-      idDolce: 1,
+      idDolce: this.valueDolce,
       NumeroDolciDaVendere: this.Qta
     }
     // var s: any = this.dataMessaInVendita;
@@ -109,7 +110,7 @@ export class VetrinaComponent implements OnInit {
     });
   }
 
-  open(content: any) {
+  MettiInVendita(content: any) {
     this.modal.open(content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result)  => {
       this.closeResult = `Closed with: ${result}`;
@@ -144,4 +145,7 @@ export class VetrinaComponent implements OnInit {
     });
   }
 
+  changeDolce(val: any){
+    this.valueDolce = val.currentTarget.value;
+  }
 }

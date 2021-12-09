@@ -1,1 +1,140 @@
-<p>backoffice works!</p>
+<br>
+
+<button class="btn btn-lg btn-outline-primary" (click)="NewDolce(content)">
+    Nuovo
+</button>
+
+<ng-template #contentVisIngr let-modalVisIngr>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Pastry Shop
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalVisIngr.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <h5 class="modal-header" id="modal-basic-title">
+        <b>{{Nome}}</b>
+    </h5>
+    <div class="modal-body">
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Quantità</th>
+                        <th>Nome</th>
+                        <th>UM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ingredientiDolce">
+                        <td>{{item.quantita}}</td>
+                        <td>{{item.nome}}</td>
+                        <td>{{item.unitaDiMisura.sigla}} ({{item.unitaDiMisura.nomeCompleto}})</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modalVisIngr.close('s')">
+            Annulla
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Pastry Shop
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="Nome">
+                    Nome
+                </label>
+                <div class="input-group">
+                    <input 
+                        [(ngModel)]= "Nome"
+                        name= "Nome"
+                        class="form-control" 
+                        placeholder="Nome">
+                </div>
+                <label for="Prezzo">
+                    Prezzo
+                </label>
+                <div class="input-group">
+                    <input 
+                        [(ngModel)]= "Prezzo"
+                        name= "Prezzo"
+                        class="form-control" 
+                        placeholder="Prezzo">
+                </div>
+            </div>
+        </form>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Quantità</th>
+                        <th>Nome</th>
+                        <th>UM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ingredienti">
+                        <td><input [value]="" (change)="onQtaChange($event, item.id)" /></td>
+                        <td>{{item.nome}}</td>
+                        <td>{{item.unitaDiMisura.sigla}} ({{item.unitaDiMisura.nomeCompleto}})</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('s')">
+            Annulla
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveDolce(modal)">
+            Salva
+        </button>
+    </div>
+</ng-template>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of dolci">
+            <td>{{item.nome}}</td>
+            <td>{{item.prezzo}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1" (click)="OpenModalUpdate(item,content)">
+                    Modifica
+                </button>
+                <button type="button" class="btn btn-light mr-1" (click)="Elimina(item.id)">
+                    Elimina
+                </button>
+                <button type="button" class="btn btn-light mr-1" (click)="VisualizzaIngredienti(contentVisIngr, item)">
+                    Ingredienti
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

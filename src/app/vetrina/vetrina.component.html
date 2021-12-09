@@ -3,7 +3,7 @@
     Nuovo
 </button> -->
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+<button class="btn btn-lg btn-outline-primary" (click)="MettiInVendita(content)">
     Nuovo
 </button>
 
@@ -26,7 +26,8 @@
                 <label for="Quantita">
                     Dolce
                 </label>
-                <select class="form-control">
+                <select class="form-control" (change)="changeDolce($event)">
+                    <option value="" selected disabled>Scegli un dolce...</option>
                     <option *ngFor="let item of elencoDolci | keyvalue" 
                         value="{{item.key}}">{{ item.value }}</option>
                   </select>
@@ -40,22 +41,6 @@
                         class="form-control" 
                         placeholder="0">
                 </div>
-                <!-- <label for="dataMessaInVendita">
-                    Data messa in vendita
-                </label>
-                <div class="input-group">
-                    <input id="dataMessaInVendita" 
-                        class="form-control" 
-                        ngbDatepicker #dp="ngbDatepicker"
-                        [(ngModel)]= "dataMessaInVendita"
-                        name= "dataMessaInVendita"
-                        placeholder="yyyy-mm-dd">
-                    <div class="input-group-append">
-                        <button class="btn 
-                            btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
-                        </button>
-                    </div>
-                </div> -->
             </div>
         </form>
     </div>

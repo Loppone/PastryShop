@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/vetrina'])
       },
       error => {
-          this.MessageError = error.message
+          this.MessageError = 'Utente e/o password non validi'
       });
     }
 }
