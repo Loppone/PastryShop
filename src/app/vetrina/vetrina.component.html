@@ -26,13 +26,10 @@
                 <label for="Quantita">
                     Dolce
                 </label>
-                <div ngbDropdown 
-                    class="input-group"
-                    [(ngModel)]= "cmbDolce">
-                    <button class="btn btn-outline-primary" id="cmb" ngbDropdownToggle>Dolce</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    </div>
-                  </div>
+                <select class="form-control">
+                    <option *ngFor="let item of elencoDolci | keyvalue" 
+                        value="{{item.key}}">{{ item.value }}</option>
+                  </select>
                 <label for="Quantita">
                     Quantità
                 </label>
@@ -43,7 +40,7 @@
                         class="form-control" 
                         placeholder="0">
                 </div>
-                <label for="dataMessaInVendita">
+                <!-- <label for="dataMessaInVendita">
                     Data messa in vendita
                 </label>
                 <div class="input-group">
@@ -58,7 +55,7 @@
                             btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
@@ -115,7 +112,7 @@
         </button>
     </div>
    <div class="modal-body">
-<input type="number" [(ngModel)]="qtaMod">
+<input type="number" [(ngModel)]="qtaMod" name="qtaMod">
 
     </div>
     <div class="modal-footer">

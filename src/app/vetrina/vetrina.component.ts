@@ -17,6 +17,11 @@ export interface DtoDolceInVenditaUpdate {
   numeroDolciDaVendere: number
 }
 
+export interface DtoDolceInVetrinaInsert {
+  idDolce: number,
+  NumeroDolciDaVendere: number
+}
+
 @Component({
   selector: 'app-vetrina',
   templateUrl: './vetrina.component.html',
@@ -31,6 +36,7 @@ export class VetrinaComponent implements OnInit {
     private modal: NgbModal,private myModal: NgbModal) { }
 
   dolciInVetrina: Vetrina[] = [];
+  elencoDolci!: Map<number, string>;
   dolceVenduto!: Vetrina;
   closeResult = '';
   Qta: any;
@@ -39,6 +45,13 @@ export class VetrinaComponent implements OnInit {
   qtaMod!: number;
 
   ngOnInit(): void {
+    this.service.elencoDolci().subscribe(data =>{
+      this.elencoDolci = data;
+    },
+    error => {
+
+    });
+
     this.LoadVetrina();
   }
 
@@ -51,11 +64,13 @@ export class VetrinaComponent implements OnInit {
     });
   }
 
-  Sell(item: Vetrina){
+  Sell(modal: any){
     var dolce: DtoDolceInVenditaUpdate = {
-       idDolceVetrina: item.idLotto,
+       idDolceVetrina: this.itemToSend.idLotto,
        numeroDolciDaVendere: this.qtaMod
     }
+
+    modal.close('s');
 
     this.service.sellDolce(dolce).subscribe(data =>{
       this.dolceVenduto = data;
@@ -77,10 +92,21 @@ export class VetrinaComponent implements OnInit {
   }
 
   saveDolce(modal: any){
-    var s: any = this.dataMessaInVendita;
-    var d: number = this.Qta;
-    var c: any = this.cmbDolce;
-    modal.close('d');
+    var dolce: DtoDolceInVetrinaInsert = {
+      idDolce: 1,
+      NumeroDolciDaVendere: this.Qta
+    }
+    // var s: any = this.dataMessaInVendita;
+    // var c: any = this.cmbDolce;
+    
+    modal.close('ss');
+  
+    this.service.newDolce(dolce).subscribe(data =>{
+      this.LoadVetrina();
+    },
+    error =>{
+      this.notification.showError(error.error, "Errore!");
+    });
   }
 
   open(content: any) {
