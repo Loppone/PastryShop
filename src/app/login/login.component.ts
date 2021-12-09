@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { PastryShopService } from '../pastry-shop.service';
 
 export interface User {
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   MessageError: string;
 
 
-  constructor(private service: PastryShopService) {
+  constructor(private service: PastryShopService, private router: Router) {
     this.Username = "";
     this.Password = "";
     this.MessageError = "";
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
     
     this.service.login(this.Credentials).subscribe(data => 
       {
-        this.UserObject = data
+        this.UserObject = data;
+        this.router.navigate(['/vetrina'])
       },
       error => {
           this.MessageError = error.message

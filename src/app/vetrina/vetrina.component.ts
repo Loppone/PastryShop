@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NotificationService } from '../notification.service';
 import { PastryShopService } from '../pastry-shop.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -23,16 +23,20 @@ export interface DtoDolceInVenditaUpdate {
   styleUrls: ['./vetrina.component.css']
 })
 export class VetrinaComponent implements OnInit {
+  itemToSend: any;
 
   constructor(
     private service: PastryShopService, 
     private notification: NotificationService,
-    private modal: NgbModal) { }
+    private modal: NgbModal,private myModal: NgbModal) { }
 
   dolciInVetrina: Vetrina[] = [];
   dolceVenduto!: Vetrina;
   closeResult = '';
-  templ: any;
+  Qta: any;
+  dataMessaInVendita: any;
+  cmbDolce: any;
+  qtaMod!: number;
 
   ngOnInit(): void {
     this.LoadVetrina();
@@ -49,8 +53,8 @@ export class VetrinaComponent implements OnInit {
 
   Sell(item: Vetrina){
     var dolce: DtoDolceInVenditaUpdate = {
-      idDolceVetrina: item.idLotto,
-      numeroDolciDaVendere: 50
+       idDolceVetrina: item.idLotto,
+       numeroDolciDaVendere: this.qtaMod
     }
 
     this.service.sellDolce(dolce).subscribe(data =>{
@@ -72,6 +76,13 @@ export class VetrinaComponent implements OnInit {
     });
   }
 
+  saveDolce(modal: any){
+    var s: any = this.dataMessaInVendita;
+    var d: number = this.Qta;
+    var c: any = this.cmbDolce;
+    modal.close('d');
+  }
+
   open(content: any) {
     this.modal.open(content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result)  => {
@@ -91,4 +102,20 @@ export class VetrinaComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+  OpenModalSell(item: any,contentMyModal: any){
+    this.itemToSend = item;
+    this.openAlert(contentMyModal)
+  }
+
+  openAlert(contentMyModal: any) {
+    this.myModal.open(contentMyModal,
+   {ariaLabelledBy: 'modal-basic-title'}).result.then((result)  => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = 
+         `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
 }

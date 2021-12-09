@@ -26,20 +26,22 @@
                 <label for="Quantita">
                     Dolce
                 </label>
-                <div ngbDropdown class="input-group">
+                <div ngbDropdown 
+                    class="input-group"
+                    [(ngModel)]= "cmbDolce">
                     <button class="btn btn-outline-primary" id="cmb" ngbDropdownToggle>Dolce</button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                      <button ngbDropdownItem>Action - 1</button>
-                      <button ngbDropdownItem>Another Action</button>
-                      <button ngbDropdownItem>Something else is here</button>
                     </div>
                   </div>
-
                 <label for="Quantita">
                     Quantità
                 </label>
                 <div class="input-group">
-                    <input id="disponibilita" class="form-control" placeholder="0">
+                    <input 
+                        [(ngModel)]= "Qta"
+                        name= "Qta"
+                        class="form-control" 
+                        placeholder="0">
                 </div>
                 <label for="dataMessaInVendita">
                     Data messa in vendita
@@ -48,6 +50,8 @@
                     <input id="dataMessaInVendita" 
                         class="form-control" 
                         ngbDatepicker #dp="ngbDatepicker"
+                        [(ngModel)]= "dataMessaInVendita"
+                        name= "dataMessaInVendita"
                         placeholder="yyyy-mm-dd">
                     <div class="input-group-append">
                         <button class="btn 
@@ -59,7 +63,10 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('s')">
+            Annulla
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveDolce(modal)">
             Salva
         </button>
     </div>
@@ -85,7 +92,7 @@
             <td>{{item.prezzoScontato}}</td>
             <td>{{item.dataMessaInVendita | date:"dd/MM/yyyy hh:mm"}}</td>
             <td>
-                <button type="button" class="btn btn-light mr-1" (click)="Sell(item)">
+                <button type="button" class="btn btn-light mr-1" (click)="OpenModalSell(item,contentMyModal)">
                     Vendi
                 </button>
                 <button type="button" class="btn btn-light mr-1" (click)="Elimina(item.idLotto)">
@@ -95,3 +102,28 @@
         </tr>
     </tbody>
 </table>
+
+<ng-template #contentMyModal let-myModal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Pastry Shop
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="myModal.dismiss('Cross click')">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+   <div class="modal-body">
+<input type="number" [(ngModel)]="qtaMod">
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="myModal.close('s')">
+            Annulla
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="Sell(myModal)">
+            Salva
+        </button>
+    </div>
+</ng-template>
