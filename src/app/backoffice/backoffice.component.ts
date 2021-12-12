@@ -60,8 +60,10 @@ export class BackofficeComponent implements OnInit {
   ingredientiDolce: Ingrediente[] = [];
   isUpdate: boolean = false;
   idDolce!: number;
+  ute: string = "";
 
   ngOnInit(): void {
+    this.ute = this.service.globalUname;
     this.LoadDolci();
     this.LoadIngredienti();
   }

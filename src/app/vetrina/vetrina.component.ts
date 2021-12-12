@@ -44,8 +44,10 @@ export class VetrinaComponent implements OnInit {
   cmbDolce: any;
   qtaMod!: number;
   valueDolce!: number;
+  ute: string = "";
 
   ngOnInit(): void {
+    this.ute = this.service.globalUname;
     this.service.elencoDolci().subscribe(data =>{
       this.elencoDolci = data;
     },

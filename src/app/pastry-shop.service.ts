@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class PastryShopService {
 
   readonly ApiUrl = "http://localhost:25557";
+  globalUname: string = "";
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,7 +23,10 @@ export class PastryShopService {
   }
 
   login(cred: any){
-    return this.http.post<User>(this.ApiUrl + '/api/Login', cred);
+    return this.http.post<User>(this.ApiUrl + '/api/Login', cred).subscribe(data => {
+      this.globalUname = data.nome;
+      this.router.navigate(['/vetrina']);
+    });
   }
 
    loadVetrina() : Observable<Vetrina[]> {
