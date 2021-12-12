@@ -15,13 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SkipComponent } from './skip/skip.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     VetrinaComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    SkipComponent
   ],
   imports: [
     HttpClientModule,

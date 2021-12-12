@@ -18,17 +18,22 @@ export class AppComponent implements OnInit {
   }
 
   runJob(){
-    this.service.runJob().subscribe(data => 
-      {
-        console.info('job eseguito');
-        this.router.routeReuseStrategy.shouldReuseRoute = function () {
-          return false;
-      }
-      this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/','vetrina']);
-      },
-      error => {
-        console.error('Errore!');
-      });;
+    this.service.runJob();
+    // .subscribe(data => 
+    //   {
+    //     console.info('job eseguito');
+    //     this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    //       return false;
+    //   }
+    //   this.router.onSameUrlNavigation = 'reload';
+    //     this.router.navigate(['/','vetrina']);
+    //   },
+    //   error => {
+    //     console.error('Errore!');
+    //   });;
+  }
+
+  skippa(){
+    this.router.navigate(['/backoffice']);
   }
 }
